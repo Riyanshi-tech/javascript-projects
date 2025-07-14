@@ -31,7 +31,9 @@
 async function getWeather() {
   const city = document.getElementById("cityInput").value;
   const weatherDiv = document.getElementById("weather");
-  const apiKey = "YOUR_API_KEY"; // ← Replace this with your real OpenWeatherMap API key
+  const apiKey = "97e98a1d29c282c95d374ab257ef95fc";
+
+
 
   if (!city) {
     weatherDiv.innerHTML = "Please enter a city name.";
@@ -42,6 +44,7 @@ async function getWeather() {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
     );
+
 
     if (!response.ok) {
       throw new Error("City not found");
