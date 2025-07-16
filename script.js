@@ -29,28 +29,31 @@
 //   taskList.appendChild(li);
 // }
 async function getWeather() {
-  const city = document.getElementById("cityInput").value;
+  const cityInput = document.getElementById("cityInput").value.trim();
   const weatherDiv = document.getElementById("weather");
   const apiKey = "97e98a1d29c282c95d374ab257ef95fc";
 
-
-
-  if (!city) {
-    weatherDiv.innerHTML = "Please enter a city name.";
+  if (!cityInput) {
+    weatherDiv.innerHTML = "⚠️ Please enter a city name.";
     return;
   }
 
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+    cityInput
+  )}&appid=${apiKey}&units=metric`;
+  console.log("🔍 Fetching URL:", url);
+
   try {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    );
+    const response = await fetch(url);
+    const data = await response.json();
 
+    console.log("🌦 Full API Response:", data);
 
-    if (!response.ok) {
-      throw new Error("City not found");
+    if (data.cod !== 200) {
+      weatherDiv.innerHTML = `❌ Error: ${data.message}`;
+      return;
     }
 
-    const data = await response.json();
     const { name, main, weather } = data;
 
     weatherDiv.innerHTML = `
@@ -60,6 +63,7 @@ async function getWeather() {
       <p><strong>Humidity:</strong> ${main.humidity}%</p>
     `;
   } catch (error) {
-    weatherDiv.innerHTML = `❌ ${error.message}`;
+    console.error("❌ Fetch Error:", error);
+    weatherDiv.innerHTML = "❌ Failed to fetch weather data.";
   }
 }
