@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Color Selector</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #grey {
+            background-color: grey;
+        }
+
+        #blue {
+            background-color: blue;
+            color: white;
+        }
+
+        #red {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>color selecttor</h1>
-    <span> class="button"  id ="grey"</span>
-    <span> class ="button" id = "blue"</span>
-    <span> class = "button " id = "red"</span>
+    <h1>Color Selector</h1>
+
+    <span class="button" id="grey">Grey</span>
+    <span class="button" id="blue">Blue</span>
+    <span class="button" id="red">Red</span>
+
     <script src="script.js"></script>
 </body>
+
 </html>
